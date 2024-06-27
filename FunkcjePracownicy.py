@@ -16,17 +16,17 @@ def get_coords(worker_location):
 
 
 def show_workers(workers):
-    # Wyświetla listę klientów firmy
-    company_name = input("Podaj nazwę firmy, której lista klientów ma zostać wyświetlona: ")
+    # Wyświetla listę pracowników firmy
+    company_name = input("Podaj nazwę firmy, której lista pracowników ma zostać wyświetlona: ")
     company_found = False
 
-    # Sprawdzenie, czy firma istnieje wśród klientów
+    # Sprawdzenie, czy firma istnieje wśród pracowników
     for worker in workers:
         if worker['worker_company'] == company_name:
             company_found = True
             break
 
-    # Wyświetlenie listy klientów, jeśli firma została znaleziona
+    # Wyświetlenie listy pracowników, jeśli firma została znaleziona
     if company_found:
         print(f"Lista pracowników firmy {company_name}:")
         for worker in workers:
@@ -38,8 +38,8 @@ def show_workers(workers):
 
 
 def add_worker(workers, companies):
-    # Dodaje nowego klienta do firmy
-    company_name = input("Podaj nazwę firmy, do której chcesz dodać klienta: ")
+    # Dodaje nowego pracownika do firmy
+    company_name = input("Podaj nazwę firmy, do której chcesz dodać pracownika: ")
     company_found = False
     for company in companies:
         if company["company_name"] == company_name:
@@ -60,7 +60,7 @@ def add_worker(workers, companies):
 
 
 def remove_worker(companies, workers):
-    # Usuwa klienta z firmy
+    # Usuwa pracownika z firmy
     company_name = input("Podaj nazwę firmy, z której chcesz usunąć pracownika: ")
     company_found = False
 
@@ -71,7 +71,7 @@ def remove_worker(companies, workers):
             worker_name = input(f"Podaj imię i nazwisko pracownika do usunięcia z {company_name}: ")
             worker_found = False
 
-            # Przeszukiwanie listy klientów, aby znaleźć i usunąć klienta
+            # Przeszukiwanie listy pracowników, aby znaleźć i usunąć pracownika
             for worker in workers:
                 if worker['worker_name'] == worker_name and worker['worker_company'] == company_name:
                     workers.remove(worker)
@@ -80,7 +80,7 @@ def remove_worker(companies, workers):
                     break
 
             if not worker_found:
-                print(f"{worker_name} nie znaleziono na liście klientów firmy {company_name}.")
+                print(f"{worker_name} nie znaleziono na liście pracowników firmy {company_name}.")
             break
 
     if not company_found:
@@ -89,7 +89,7 @@ def remove_worker(companies, workers):
 
 
 def update_worker(companies, workers):
-    # Aktualizuje dane klienta
+    # Aktualizuje dane pracownika
     company_name = input("Podaj nazwę firmy, w której chcesz zaktualizować dane pracownika: ")
     company_found = False
 
@@ -100,7 +100,7 @@ def update_worker(companies, workers):
             old_worker_name = input(f"Podaj imię i nazwisko pracownika do zaktualizowania w {company_name}: ")
             worker_found = False
 
-            # Przeszukiwanie listy klientów, aby znaleźć i zaktualizować klienta
+            # Przeszukiwanie listy pracowników, aby znaleźć i zaktualizować pracownika
             for worker in workers:
                 if worker['worker_name'] == old_worker_name and worker['worker_company'] == company_name:
                     new_worker_name = input(
@@ -108,7 +108,7 @@ def update_worker(companies, workers):
                     new_worker_location = input(
                         f"Podaj nową lokalizację dla {old_worker_name} (pozostaw puste, aby nie zmieniać): ")
 
-                    # Aktualizacja imienia i nazwiska, jeśli zostało podane
+                    # Aktualizacja imienia i nazwiska pracownika, jeśli zostało podane
                     if new_worker_name:
                         worker['worker_name'] = new_worker_name
                         print(f"Dane pracownika zostały zmienione z {old_worker_name} na {new_worker_name}.")
@@ -117,11 +117,11 @@ def update_worker(companies, workers):
                         worker['worker_location'] = new_worker_location
                         print(f"Lokalizacja pracownika {old_worker_name} została zmieniona na {new_worker_location}.")
 
-                    client_found = True
+                    worker_found = True
                     break
 
             if not worker_found:
-                print(f"{old_worker_name} nie znaleziono na liście klientów firmy {company_name}.")
+                print(f"{old_worker_name} nie znaleziono na liście pracowników firmy {company_name}.")
             break
 
     if not company_found:
@@ -169,7 +169,7 @@ def workers_map(workers):
                 location=[latitude, longitude],
                 popup=f"{worker_name},\n{worker_location}",
                 icon=folium.Icon(color='red'),
-                tooltip = worker_name
+                tooltip=worker_name
             ).add_to(map)
         else:
             print(f"Nie udało się znaleźć współrzędnych dla lokalizacji: {worker_location}")
@@ -181,8 +181,3 @@ def workers_map(workers):
     map.save(map_file)
     webbrowser.open(map_file)
 
-    folium.Marker(
-        location=[latitude, longitude],
-        popup=f"{worker_name},\n{worker_location}",
-        icon=folium.Icon(color='red'),
-    ).add_to(map)

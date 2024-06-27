@@ -164,7 +164,7 @@ def clients_map(clients):
             folium.Marker(
                 location=[latitude, longitude],
                 popup=f"{client_name},\n{client_location}",
-                icon=folium.Icon(color='red')
+                icon=folium.Icon(color='red', icon='male')
             ).add_to(map)
         else:
             print(f"Nie udało się znaleźć współrzędnych dla lokalizacji: {client_location}")
