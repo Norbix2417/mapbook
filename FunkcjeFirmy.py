@@ -104,7 +104,7 @@ def companies_map(companies):
             folium.Marker(
                 location=[latitude, longitude],
                 popup=f"{company_name},\n{company_location}",
-                icon=folium.Icon(color='red')
+                icon=folium.Icon(color='red', icon='home')
             ).add_to(map)
         else:
             print(f"Nie udało się znaleźć współrzędnych dla lokalizacji: {company_location}")

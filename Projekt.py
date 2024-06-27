@@ -4,8 +4,8 @@ from FunkcjePracownicy import show_workers, add_worker, remove_worker, update_wo
 from Lista import companies, clients, workers
 
 def logowanie():
-    correct_login = "1"
-    correct_password = "2"
+    correct_login = "Admin123"
+    correct_password = "Admin456"
     logowanie = False
 
     while not logowanie:
